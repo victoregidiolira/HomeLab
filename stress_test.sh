@@ -9,5 +9,5 @@ fi
 
 # Rodar teste de Estresse
 echo "Iniciando estresse de CPU e Memória por 60s"
-stress --cpu 1 --timeout 30s
+stress --cpu 1 --timeout 60s
 echo "Teste concluído."
