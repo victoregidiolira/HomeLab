@@ -36,3 +36,5 @@ Utilizei Nginx atuando como proxy reverso para blindar as portas internas dos se
 ## 📈 Monitoramento e Evidências
 
 * **Acesse o painel centralizado através do Proxy Reverso: http://localhost
+
+![Gráfico de Consumo de CPU no Grafana](grafana-screenshot.png)
