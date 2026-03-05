@@ -1,24 +1,38 @@
-# 🚀 Observability & Automation Home Lab
+# 🚀 Observability & Automation: HomeLab Stack
 
-Este projeto demonstra o provisionamento automatizado de um ambiente Linux monitorado, utilizando containers para isolamento de serviços e métricas em tempo real.
+Uma arquitetura de provisionamento automatizado para ambientes Linux, focada em isolamento de serviços via containers e monitoramento proativo de métricas em tempo real.
 
-## 🛠️ Tecnologias Utilizadas
-- **Docker & Docker Compose**: Orquestração da stack.
-- **Prometheus**: Banco de dados de séries temporais para métricas.
-- **Grafana**: Visualização de dados e dashboards.
-- **Nginx**: Proxy reverso para acesso seguro ao painel.
-- **Bash**: Scripts de automação (`setup_env.sh`) e geração de carga (`stress_test.sh`).
+## 🎯 Contexto Arquitetural
+Este projeto simula um ambiente de produção (NOC/SRE), garantindo que a infraestrutura seja provisionada como código (IaC) e que gargalos de processamento sejam detectados antes de impactarem a operação. 
 
-## 📋 Como Executar
-1. **Provisionamento**: `./setup_env.sh` (Instala dependências e configura firewall).
-2. **Deploy**: `docker-compose up -d`.
-3. **Monitoramento**: Acesse `http://localhost` (Porta 80 via Nginx).
-4. **Teste de Carga**: `./stress_test.sh` para gerar picos de consumo.
+Utilizei Nginx atuando como proxy reverso para blindar as portas internas dos serviços, expondo apenas o tráfego seguro na porta 80.
 
-## 📈 Evidência de Funcionamento
-Abaixo, o gráfico de CPU demonstrando o pico de processamento capturado pelo Prometheus durante a execução do script de estresse:
+## 🛠️ Stack Tecnológico
+* **Orquestração:** Docker & Docker Compose (Isolamento de serviços e rede).
+* **Time-Series Database:** Prometheus (Scrape de métricas de hardware e containers).
+* **Data Visualization:** Grafana (Dashboards dinâmicos e alertas).
+* **Proxy Reverso:** Nginx (Roteamento de tráfego centralizado).
+* **Automação:** Bash Scripting (`setup_env.sh` para dependências/firewall e `stress_test.sh` para simulação de carga).
 
-![Dashboard do Grafana](./grafana-screenshot.png)
+## 📋 Como Executar o Ambiente
 
----
-*Nota técnica: O ambiente foi configurado com limites de recursos (Resource Quotas) para garantir a estabilidade do host durante os testes de carga.*
+1. **Provisionamento e Segurança:**
+   Instale as dependências e configure as regras de firewall iniciais:
+   ```bash
+   chmod +x setup_env.sh
+   ./setup_env.sh
+
+2. **Deploy da Stack (Containers):**
+   Levante a infraestrutura de observabilidade em background:
+   ```bash
+   docker-compose up -d
+
+3. **Validação de Estresse (Opcional):**
+   Gere um pico de consumo de CPU para validar a coleta de métricas:
+   ```bash
+   chmod +x stress_test.sh
+   ./stress_test.sh
+
+## 📈 Monitoramento e Evidências
+
+* **Acesse o painel centralizado através do Proxy Reverso: http://localhost
